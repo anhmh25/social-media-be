@@ -20,9 +20,9 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         
-    - name: Push image to Docker Hub
+    - name: Build and push image to Docker Hub
       uses: docker/build-push-action@v3
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/media-be-basic:${{ github.sha }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/media-be-basic:${{ github.sha } +%s}
