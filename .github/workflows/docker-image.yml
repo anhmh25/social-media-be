@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag media/be:$(docker images | awk '($1 == "media/be") {print $2 += .01; exit}') .
+      run: docker build -f --tag media/be:$(docker images | awk '($1 == "media/be") {print $2 += .01; exit}') .
 
 
     - name: Login to Docker Hub
