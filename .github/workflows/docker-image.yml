@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build -f --tag media/be:v0.0.1 .
+      run: docker build -f Dockerfile . --tag media/be:v0.0.1 
 
 
     - name: Login to Docker Hub
