@@ -25,4 +25,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/media-be-basic:${%s}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/media-be-basic:$(docker images | awk '($1 == "your/project") {print $2 += .01; exit}') .
