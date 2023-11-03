@@ -32,6 +32,28 @@ const getAllPosts = async (req, res) => {
   }
 };
 
+// Controller deletePost
+const deletePost = async (req, res) => {
+  try {
+    const { post_id, user_id } = req.body;
+    const post = await Post.findById(post_id);
+
+    if (!post) {
+      return res.status(404).json({ message: 'Bài viết không tồn tại' });
+    }
+
+    if (post.user_id.toString() !== user_id) {
+      return res.status(404).json({ message: 'Không phải bài viết của bạn' });
+    }
+
+    await Post.deleteOne({ _id: post._id });
+    res.status(201).json({ message: 'Bài viết đã được xóa' });
+  } catch (error) {
+    console.error('Lỗi khi xóa:', error);
+    res.status(500).json({ message: 'Lỗi server' });
+  }
+};
+
 // Controller để tạo bình luận cho bài viết
 const createComment = async (req, res) => {
   try {
@@ -49,11 +71,28 @@ const createComment = async (req, res) => {
     };
     post.comments.push(comment);
     await post.save();
-
     res.status(201).json({ message: 'Bình luận đã được tạo' });
   } catch (error) {
     console.error('Lỗi khi tạo bình luận:', error);
     res.status(500).json({ message: 'Lỗi server' });
+  }
+};
+
+// Controller getAllComment
+const getAllComment = async (req, res) => {
+  try {
+    const { post_id } = req.query;
+
+    const post = await Post.findById(post_id);
+
+    if (!post.comments) {
+      return res.status(404).json({ message: 'No comments found for the specified post_id' });
+    }
+
+    res.status(200).json(post.comments);
+  } catch (error) {
+    console.error('Error when fetching comments:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
 
@@ -107,7 +146,9 @@ const removeLike = async (req, res) => {
 module.exports = {
   createPost,
   getAllPosts,
+  deletePost,
   createComment,
+  getAllComment,
   addLike,
   removeLike,
 };

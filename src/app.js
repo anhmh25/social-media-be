@@ -10,8 +10,10 @@ app.use(express.urlencoded({ extended: false })); // parse application/x-www-for
 app.use(express.json()); // parse application/json
 app.use(morgan('dev'));
 
-
 app.use('/apiv1/', router)
+app.get('/', (req, res) => {
+    res.json("Hello")
+})
 app.use('/', () => {
     console.log("hello");
 })
