@@ -26,3 +26,4 @@ jobs:
       with:
         context: .
         push: true
+        tag: media/be:v0.0.1
