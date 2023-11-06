@@ -26,4 +26,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/media-be:${{ github.sha }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/media-be:v0.0.1-${{ github.run_number }}
