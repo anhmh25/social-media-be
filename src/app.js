@@ -6,7 +6,7 @@ const app = express();
 const router = require('./routes/apiRouter')
 
 app.use(cors());
-app.use(express.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: false })); // parse application/x-www-form-urlencodeda
 app.use(express.json()); // parse application/json
 app.use(morgan('dev'));
 
